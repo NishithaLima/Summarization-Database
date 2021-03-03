@@ -1,0 +1,39 @@
+for row summary
+
+read first column
+filter out very low entropy value column
+filter out hyphenated columns and doesnt apply to first column
+aggregate same values of two columns with same value
+replace underscores by spaces and remove the parenthesis and text inside parenthesis
+if a cell has a lot of text and we dont read it
+
+
+for column summary
+1. if its text and low entropy, 
+the column name has value yes with prob "this" and similar...
+if prob is smaller than 10% we group them to others
+resort
+
+2. say the column names as the similar way to row
+
+3. "this column has this number of unique values starting from this to this"
+applies to high entropy text column
+
+4. for numeric field
+if small precision
+then say say number of unique values
+
+if precision is large 
+say low high and median
+
+6. for text, if the column has large value then drop the values. if empty then say cannot generate summary
+
+
+
+for whole table
+summarize the first column first
+
+then rank columns by entropy
+summarize the low entropy columns and for the rest just say the col name
+
+

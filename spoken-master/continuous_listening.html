@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<div class="container">
+
+    <h1>Continuous Listening (Speech-to-Text)</h1>
+    <p>We listen when you say the world <b>Allora!</b>, and give you a transcript in the console.</p>
+
+</div>
+
+<script nomodule src="./spoken.js"></script>
+<script type="module">
+import spoken from './build/spoken.js';
+( async e => {
+'use strict';
+
+var createNewString = function (oldStringObj, string) {
+  var _new = new String(string);
+
+  var keys = Object.keys(oldStringObj);  // returns only custom properties (not part of prototype)
+  for (var i=0,n=keys.length; i<n; i++){
+    var key = keys[i];
+
+    if (Number.isInteger(+key)) {
+       continue;                         // skip property if it's a numbered key
+    }
+    _new[key] = oldStringObj[key];       // simple assignment (not a deep copy) -- room for improvement
+  }
+  return _new;
+};
+
+// Setup Listener Events
+spoken.listen.on.partial( transcript => { transcript=transcript.toLowerCase(); if (transcript.includes("laura")||transcript.includes("elora")||transcript.includes("alora")||transcript.includes("ellora")||transcript.includes("allure")){ 
+var arr=transcript.split('laura').join(',').split('elora').join(',').split('ellora').join(',').split('alora').join(',').split('allure').join(',').split(',')
+transcript=createNewString( transcript, arr[arr.length-1]);
+console.log("Captured Transcript: "+transcript);} //Here we could send to the chatbot...
+} );
+spoken.listen.on.start(   voice      => { } );
+
+spoken.listen.on.end(continueCapture);
+spoken.listen.on.error(continueCapture);
+
+startCapture();
+
+function startCapture() { 
+    spoken.listen({ continuous : true }).then( transcript =>
+        console.log('Started Listening')
+    ).catch( e => true );
+}
+
+async function continueCapture() {
+    await spoken.delay(1);
+    spoken.listen.stop();
+    console.log('Stopped Listening');
+    if (spoken.recognition.continuous) startCapture();
+}
+
+function stopCapture() {
+    spoken.recognition.continuous = false;
+    spoken.listen.stop();
+}
+
+// Speak with each English voice to sample your favorites
+console.log(await spoken.voices());
+(await spoken.voices())
+    .filter(  voice => voice.lang.indexOf('en') == 0 )
+    .map(     voice => voice.name ).slice( 7, 8 )
+    .forEach( async voice => console.log(
+        (await spoken.say( 'Hi.', voice )).voice.name
+    ));
+
+})();</script>
+
+<script>(_=>{
+'use strict';
+document.querySelectorAll('.codebox').forEach( box => { 
+    box.querySelector('button').addEventListener( 'click', e => {
+        let code = box.querySelector('textarea').value;
+        eval('(async e=>{' + code + '})();');
+    } );
+} );
+})();</script>
+
+<style>
+div, body, html {
+    padding: 0;
+    margin: 0;
+}
+div, h1, body, html {
+    font-family: "San Francisco", "Helvetica Neue", "Helvetica", Arial, Sans-Serif;
+    font-weight: 400;
+}
+h1 {
+    flex: 1;
+}
+textarea {
+    flex: 10;
+    white-space: nowrap;
+    border: 0;
+    padding: 20px;
+    border-radius: 4px;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 18px;
+    height: 170px;
+    background: #3f3f32;
+    color: #e1e2ee;
+}
+div.codebox {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    margin: auto;
+}
+div.container {
+    margin: 30px;
+}
+div.instructions {
+    background: #f1f1fe;
+    padding: 30px;
+}
+</style>

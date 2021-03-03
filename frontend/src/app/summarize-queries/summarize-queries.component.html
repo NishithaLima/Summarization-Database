@@ -1,0 +1,56 @@
+<mat-toolbar color="primary">
+  <button mat-button disabled>
+    <img class="jpg-icon" src="../../../../assets/logo.png" style="height: 64px;">
+  </button>
+  Summarization and Database Vocalization
+</mat-toolbar>
+
+
+<mat-grid-list cols="4" rowHeight="100px">
+  <mat-grid-tile [colspan]="2" [rowspan]="2">
+    <mat-form-field appearance="fill">
+      <mat-label>Select Tables</mat-label>
+      <mat-select  (selectionChange)="selectedValue($event)">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let tname of tables" [value]="tname">{{tname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile>
+
+  <!-- <mat-grid-tile [colspan]="1" [rowspan]="2">
+    <mat-form-field appearance="fill">
+      <mat-label>Select Types</mat-label>
+      <mat-select (selectionChange)="selectedQueryValue($event)">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let content of contentTypes" [value]="content">{{content}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-grid-tile> -->
+
+  <mat-grid-tile [colspan]="1" [rowspan]="2">
+    <mat-radio-group aria-label="Select an option">
+      <mat-radio-button value="1">Bert</mat-radio-button>
+      <mat-radio-button value="2">Pegasus</mat-radio-button>
+    </mat-radio-group>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="1" [rowspan]="2">
+    <button  (click)="getSummarizedOutput($event)"><img src="./../../assets/listening.png"></button>
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+<table class="summary">
+  <thead>
+    <tr>      
+      <th></th>     
+      <th *ngFor="let head of columnNames">{{head}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of rowsData; let i = index"> 
+      <td>{{ i + 1 }}</td>          
+      <td *ngFor="let list of item">{{list}}</td>
+    </tr>
+  </tbody>
+</table>

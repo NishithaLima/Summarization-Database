@@ -1,0 +1,52 @@
+.mat-toolbar.mat-primary {
+    background: #262673;
+    color: #fff;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+
+.center {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  ::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+    border-color:#262673 !important; 
+  }
+  
+  ::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle{
+    color:#262673 !important;
+    background-color:#262673 !important ;
+  }
+  
+  ::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+      background-color:#262673 !important;
+  }
+
+  .summary {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 80%;
+    margin: auto;
+    justify-content: center;
+  }
+  
+  .summary td, th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .summary tr:nth-child(even){background-color: #f2f2f2;}
+  
+  .summary tr:hover {background-color: #ddd;}
+  
+  .summary th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #262673;
+    color: white;
+  }
