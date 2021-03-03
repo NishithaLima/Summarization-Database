@@ -1,2 +1,3 @@
 # Summarization-and-Database-Vocalization
-DBSE Scientific Team Project Repo
+Today, there is a need for specialised experts on SQL or similar languages to understand and query large databases and extract valuable information from these systems. Then, we need another set of experts to understand the data extracted and summarise it in simpler terms for the end user. 
+However, the way we interact with data is constantly changing and with the large amount of data being generated everyday, there is a strong need to bridge this knowledge gap for Data Analytics through the use of simple tools that can work without complex schema knowledge or SQL. In addition, with new devices coming up everyday which may not have a screen for interaction, we will eventually have to find a effective Data Management system for such devices. Both aspects suggest the importance of working on techniques to support voice-based interfaces.
